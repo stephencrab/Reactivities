@@ -26,6 +26,7 @@ namespace Persistence
 
         public DbSet<Activity> Activities { get; set; }
         public DbSet<ActivityAttendee> ActivityAttendees { get; set; }
+        public DbSet<Photo> Photos { get; set;}
         // public string DbPath { get; }
 
         // // The following configures EF to create a Sqlite database file in the
