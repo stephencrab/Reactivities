@@ -5,7 +5,7 @@ import { Button, Container, Dropdown, DropdownItem, DropdownMenu, Image, Menu } 
 import { useStore } from "../stores/store";
 
 export default observer(function NavBar() {
-    const {userStore: {user, logout}} = useStore();
+    const { userStore: { user, logout } } = useStore();
 
     return (
         <Menu inverted fixed='top'>
@@ -23,7 +23,7 @@ export default observer(function NavBar() {
                     <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
                     <Dropdown pointing='top left' text={user?.displayName}>
                         <DropdownMenu>
-                            <DropdownItem as={Link} to={`/profile/${user?.username}`} 
+                            <DropdownItem as={Link} to={`/profiles/${user?.username}`}
                                 text='My Profile' icon='user' />
                             <DropdownItem onClick={logout} text='Logout' icon='power' />
                         </DropdownMenu>
