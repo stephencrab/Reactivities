@@ -19,7 +19,9 @@ namespace API.Extensions
         IConfiguration config)
         {
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(options => {
+                options.CustomSchemaIds(type => type.ToString());
+            });
 
             var connectionString = config.GetConnectionString("ConnStr");
             services.AddDbContext<DataContext>(options => options.UseSqlite(connectionString));
@@ -28,7 +30,11 @@ namespace API.Extensions
             {
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();
+                    policy
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                        .WithOrigins("http://localhost:3000");
                 });
             });
 
@@ -37,6 +43,7 @@ namespace API.Extensions
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
             services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
+            services.AddSignalR();
 
             return services;
         }
