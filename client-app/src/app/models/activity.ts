@@ -1,4 +1,3 @@
-import { BooleanLiteral } from "typescript";
 import { Profile } from "./profile";
 
 export interface Activity {
@@ -14,7 +13,7 @@ export interface Activity {
     isGoing: boolean;
     isHost: boolean;
     host?: Profile;
-    attendees?: Profile[];
+    attendees: Profile[];
 }
 
 export class Activity implements Activity {
